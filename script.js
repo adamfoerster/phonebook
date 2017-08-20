@@ -8,7 +8,7 @@ $('#view').hide();
 var fetchTable = function (){
     $.get(backend + "phonebook.list&t="+(new Date().getTime()),
         function(data) {
-            // list = data;
+            $('#tbody').html('');
             for (var person in data) {
                 if (data.hasOwnProperty(person)) {
                     list.push(data[person]);

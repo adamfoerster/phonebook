@@ -18,7 +18,10 @@ class Person{
     }
 
     public function fetch(){
-        return $this->list;
+        $list = [];
+        foreach ($this->list as $person)
+            if (isset($person['id'])) $list[$person['id']] = $person;
+        return $list;
     }
 
     public function add($person){
