@@ -7,13 +7,13 @@ class Person{
 
     public function __construct(){
         if (isset($_SESSION['person_list'])){
-            $this->list = $_SESSION['person_list'];
+            $this->list = json_decode(file_get_contents('array.json'), true);
         } else {
             $this->list = [
                 1 => [ 'id'=> 1, 'name' => 'Adam Foerster', 'phone' => '34689865'],
                 2 => [ 'id'=> 2, 'name' => 'Rebecca Foerster', 'phone' => '3496876430'],
             ];
-            $_SESSION['person_list'] = $this->list;
+            file_put_contents("array.json",json_encode($this->list));
         }
     }
 
@@ -23,7 +23,7 @@ class Person{
 
     public function add($person){
         $this->list->append($person);
-        $_SESSION['person_list'] = $this->list;
+        file_put_contents("array.json",json_encode($this->list));
         return true;
     }
 
@@ -42,12 +42,12 @@ class Person{
     public function edit($person){
         $this->load($person['id']);
         $this->list[$person['id']] = $person;
-        $_SESSION['person_list'] = $this->list;
+        file_put_contents("array.json",json_encode($this->list));
     }
 
     public function delete($id){
         unset($this->list[$id]);
-        $_SESSION['person_list'] = $this->list;
+        file_put_contents("array.json",json_encode($this->list));
     }
 }
 ?>
