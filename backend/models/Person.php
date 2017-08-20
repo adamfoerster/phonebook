@@ -30,16 +30,16 @@ class Person{
 
     public function load($id){
         foreach ($this->list as $person) {
-            print_r($person);
+            // print_r($person);
             if ($person->id == $id) {
-                echo 'eh igual';
+                // echo 'eh igual';
                 $this->name = $person->name;
                 $this->id = $person->id;
                 $this->phone = $person->phone;
                 return $person;
             }
-            return false;
         }
+        return false;
     }
 
     public function edit($person){
