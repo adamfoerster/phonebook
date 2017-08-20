@@ -9,6 +9,7 @@ class PhoneBookCtrl{
     }
 
     public function save($person){
+        print_r($this->person->load($person['id']));
         if ($person['id'] && $this->person->load($person['id'])){
             return ['recordSaved'=> $this->person->edit($person)];
         } else {

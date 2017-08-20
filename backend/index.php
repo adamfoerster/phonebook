@@ -7,7 +7,7 @@ header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 
 $pbCtrl = new PhoneBookCtrl();
-// print_r($_GET);
+
 if (isset($_GET['r'])){
     switch ($_GET['r']) {
         case 'phonebook.save':
