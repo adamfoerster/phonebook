@@ -49,7 +49,10 @@ class Person{
     }
 
     public function delete($id){
+        print_r($this->list[$id]);
         unset($this->list[$id]);
+        print_r($this->list);
+        exit;
         file_put_contents("array.json",json_encode($this->list));
         return $id;
     }

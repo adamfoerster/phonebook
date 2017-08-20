@@ -4,19 +4,23 @@ var list = [];
 $('#table').hide();
 $('#edit').hide();
 $('#view').hide();
-$.get(backend + "phonebook.list",
-    function(data) {
-        // list = data;
-        for (var person in data) {
-            if (data.hasOwnProperty(person)) {
-                list.push(data[person]);
+
+var fetchTable = function (){
+    $.get(backend + "phonebook.list&t="+(new Date().getTime()),
+        function(data) {
+            // list = data;
+            for (var person in data) {
+                if (data.hasOwnProperty(person)) {
+                    list.push(data[person]);
+                }
             }
-        }
-        seeTable();
-	})
-	.fail(function(error) {
-		console.log(error);
-	});
+            seeTable();
+    	})
+    	.fail(function(error) {
+    		console.log(error);
+    	});
+}
+fetchTable();
 
 var seeTable = function() {
     $('#tbody').html('');
@@ -39,7 +43,7 @@ var save = function() {
     $.post(backend+'phonebook.save' , post)
     .done(function(){
         console.log('post sent');
-        seeTable();
+        fetchTable();
     })
     .fail(function(error) {
 		console.log(error);
@@ -78,9 +82,9 @@ var edit = function(id=null) {
 
 var exclude = function(id) {
 	// console.log('exclude', id);
-    $.get(backend+'phonebook.delete?id='+id)
+    $.get(backend+'phonebook.delete&id='+id)
     .done(function(data){
-        seeTable();
+        fetchTable();
     })
     .fail(function(error) {
 		console.log(error);
