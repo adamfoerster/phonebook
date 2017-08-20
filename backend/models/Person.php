@@ -6,7 +6,7 @@ class Person{
     public $list = [];
 
     public function __construct(){
-        if (file_get_contents('array.json')){
+        if (file_exists('array.json')){
             $this->list = json_decode(file_get_contents('array.json'), true);
         } else {
             $this->list = [
