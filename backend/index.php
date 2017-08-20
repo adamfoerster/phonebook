@@ -18,10 +18,10 @@ if (isset($_GET['r'])){
             break;
 
         case 'phonebook.load':
-            echo(json_encode($pbCtrl->load(1)));
+            echo(json_encode($pbCtrl->load($_GET['id'])));
             break;
         case 'phonebook.delete':
-            echo(json_encode($pbCtrl->delete(1)));
+            echo(json_encode($pbCtrl->delete($_GET['id'])));
             break;
 
         default:

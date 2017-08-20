@@ -40,7 +40,10 @@ var save = function() {
     .done(function(){
         console.log('post sent');
         seeTable();
-    });
+    })
+    .fail(function(error) {
+		console.log(error);
+	});
 };
 
 var load = function(personId) {
@@ -74,8 +77,14 @@ var edit = function(id=null) {
 };
 
 var exclude = function(id) {
-	console.log('exclude', id);
-	seeTable();
+	// console.log('exclude', id);
+    $.get(backend+'phonebook.delete?id='+id)
+    .done(function(data){
+        seeTable();
+    })
+    .fail(function(error) {
+		console.log(error);
+	});
 };
 
 var findPerson = function(id) {
