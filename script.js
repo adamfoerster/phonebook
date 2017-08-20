@@ -38,7 +38,7 @@ var list = [{
 
 $.get(backend + "phonebook.list",
     function(data) {
-        list = eval("(" + data + ")");
+        // list = json_encode(data);
         console.log(data, list);
 	})
 	.done(function() {

@@ -10,8 +10,8 @@ class Person{
             $this->list = $_SESSION['person_list'];
         } else {
             $this->list = [
-                1 => [ 'name' => 'Adam Foerster', 'phone' => '34689865'],
-                2 => [ 'name' => 'Rebecca Foerster', 'phone' => '3496876430'],
+                1 => [ 'id'=> 1, 'name' => 'Adam Foerster', 'phone' => '34689865'],
+                2 => [ 'id'=> 2, 'name' => 'Rebecca Foerster', 'phone' => '3496876430'],
             ];
             $_SESSION['person_list'] = $this->list;
         }
