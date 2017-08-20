@@ -17,8 +17,7 @@ self.addEventListener('fetch', function(evt) {
 function precache() {
 	return caches.open(CACHE).then(function(cache) {
 		return cache.addAll([
-			'./img',
-            './index.html'
+			'./img'
 		]);
 	});
 }
@@ -26,7 +25,7 @@ function precache() {
 function fromCache(request) {
 	return caches.open(CACHE).then(function(cache) {
 		return cache.match(request).then(function(matching) {
-			return matching;
+			return matching || Promise.reject('no-match');
 		});
 	});
 }
