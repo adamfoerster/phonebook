@@ -1,4 +1,4 @@
-var CACHE = 'cache-and-update';
+// var CACHE = 'cache-and-update';
 
 // self.addEventListener('install', function(evt) {
 // 	console.log('The service worker is being installed.');
@@ -14,27 +14,27 @@ var CACHE = 'cache-and-update';
 	// evt.waitUntil(update(evt.request));
 // });
 
-function precache() {
-    return caches.open(CACHE);
-	// return caches.open(CACHE).then(function(cache) {
-		// return cache.addAll([
-		// 	'./img'
-		// ]);
-	// });
-}
+// function precache() {
+//     return caches.open(CACHE);
+// 	// return caches.open(CACHE).then(function(cache) {
+// 		// return cache.addAll([
+// 		// 	'./img'
+// 		// ]);
+// 	// });
+// }
 
-function fromCache(request) {
-	return caches.open(CACHE).then(function(cache) {
-		return cache.match(request).then(function(matching) {
-			return Promise.reject('no-match');
-		});
-	});
-}
-
-function update(request) {
-	return caches.open(CACHE).then(function(cache) {
-		return fetch(request).then(function(response) {
-			return cache.put(request, response);
-		});
-	});
-}
+// function fromCache(request) {
+// 	return caches.open(CACHE).then(function(cache) {
+// 		return cache.match(request).then(function(matching) {
+// 			return Promise.reject('no-match');
+// 		});
+// 	});
+// }
+//
+// function update(request) {
+// 	return caches.open(CACHE).then(function(cache) {
+// 		return fetch(request).then(function(response) {
+// 			return cache.put(request, response);
+// 		});
+// 	});
+// }
