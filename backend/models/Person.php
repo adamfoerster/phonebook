@@ -40,8 +40,8 @@ class Person{
     }
 
     public function edit($person){
-        $this->load($person->id);
-        $this->list[$person->id] = $person;
+        $this->load($person['id']);
+        $this->list[$person['id']] = $person;
         $_SESSION['person_list'] = $this->list;
     }
 

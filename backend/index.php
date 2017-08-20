@@ -11,8 +11,8 @@ $pbCtrl = new PhoneBookCtrl();
 if (isset($_GET['r'])){
     switch ($_GET['r']) {
         case 'phonebook.save':
-            print_r($_POST);
-            $pbCtrl->save();
+            // print_r($_POST);
+            $pbCtrl->save($_POST);
             break;
         case 'phonebook.list':
             echo(json_encode($pbCtrl->fetch()));

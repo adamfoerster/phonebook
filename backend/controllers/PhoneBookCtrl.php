@@ -9,7 +9,7 @@ class PhoneBookCtrl{
     }
 
     public function save($person){
-        if ($this->person->load($person->id)){
+        if ($this->person->load($person['id'])){
             $this->person->edit($person);
         } else {
             $this->person->add($person);
