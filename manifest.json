@@ -1,0 +1,12 @@
+{
+  "short_name": "Phonebook",
+  "name": "Agenda Telefônica",
+  "icons": [
+    {
+      "src": "img/phonebook.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "index.html"
+}
