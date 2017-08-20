@@ -36,18 +36,6 @@ var seeTable = function() {
 
 var save = function() {
     let post = {id: $('#id').val(), name: $('#name').val(), phone: $('#phone').val()};
-    // $.ajax({
-    //     type: 'POST',
-    //     url: backend+'phonebook.save',
-    //     data: post,
-    //     success: function(){
-    //         console.log('post sent');
-    //         seeTable();
-    //     },
-    //     fail: function(error){
-    //         console.log(error);
-    //     }
-    // });
     $.post(backend+'phonebook.save' , post)
     .done(function(){
         console.log('post sent');
