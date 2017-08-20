@@ -1,12 +1,13 @@
 {
-  "short_name": "Phonebook",
-  "name": "Agenda Telefônica",
-  "icons": [
-    {
-      "src": "img/phonebook.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": "index.html"
+	"short_name": "Phonebook",
+	"name": "Agenda Telefônica",
+	"background_color": "#2196F3",
+    "display": "standalone",
+    "theme_color": "#2196F3",
+	"icons": [ {
+		"src": "img/phonebook.png",
+		"type": "image/png",
+		"sizes": "512x512"
+	} ],
+	"start_url": "index.html"
 }
