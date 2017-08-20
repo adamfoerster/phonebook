@@ -1,10 +1,10 @@
 var CACHE = 'cache-and-update';
 
-self.addEventListener('install', function(evt) {
-	console.log('The service worker is being installed.');
-
-	evt.waitUntil(precache());
-});
+// self.addEventListener('install', function(evt) {
+// 	console.log('The service worker is being installed.');
+//
+// 	evt.waitUntil(precache());
+// });
 
 
 // self.addEventListener('fetch', function(evt) {
