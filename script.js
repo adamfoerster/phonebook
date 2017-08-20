@@ -1,68 +1,108 @@
-var list = [
-    {id:"1", name:"Adam Foerster", phone:"243352323"},
-    {id:"2", name:"Rebecca Foerster", phone:"243352323"},
-    {id:"3", name:"Phoebe Buffay", phone:"243352323"},
-    {id:"4", name:"Chandler Bing", phone:"243352323"},
-    {id:"5", name:"Monica Geller", phone:"243352323"},
-    {id:"6", name:"Ross Geller", phone:"243352323"},
-    {id:"7", name:"Rachel Gray", phone:"243352323"},
+var backend = "http://phonebook.adamfoerster.com/backend/index.php?r=";
+var list = [{
+		id: "1",
+		name: "Adam Foerster",
+		phone: "243352323"
+	},
+	{
+		id: "2",
+		name: "Rebecca Foerster",
+		phone: "243352323"
+	},
+	{
+		id: "3",
+		name: "Phoebe Buffay",
+		phone: "243352323"
+	},
+	{
+		id: "4",
+		name: "Chandler Bing",
+		phone: "243352323"
+	},
+	{
+		id: "5",
+		name: "Monica Geller",
+		phone: "243352323"
+	},
+	{
+		id: "6",
+		name: "Ross Geller",
+		phone: "243352323"
+	},
+	{
+		id: "7",
+		name: "Rachel Gray",
+		phone: "243352323"
+	},
 ];
 
-$(list).each(function(){
-    $('#tbody').append(`<tr id="person_${this.id}"><td>${this.name}</td><td>${this.phone}</td></tr>`);
+$.get(backend + "phonebook.list",
+    function(data) {
+        list = eval("(" + data + ")");
+        console.log(data, list);
+	})
+	.done(function() {
+		alert("second success");
+	})
+	.fail(function(error) {
+		console.log(error);
+	});
+
+$(list).each(function() {
+	$('#tbody').append(`<tr id="person_${this.id}"><td>${this.name}</td><td>${this.phone}</td></tr>`);
 });
 
 $('#edit').hide();
 $('#view').hide();
 
-$('tr').click(function(e){
-    load(e.currentTarget.id);
+$('tr').click(function(e) {
+	load(e.currentTarget.id);
 });
 
-var seeTable = function(){
-    $('#table').show();
-    $('#edit').hide();
-    $('#view').hide();
+var seeTable = function() {
+	$('#table').show();
+	$('#edit').hide();
+	$('#view').hide();
 };
 
-var save = function(person){
-    seeTable();
+var save = function(person) {
+	seeTable();
 };
 
-var load = function(personId){
-    var p = findPerson(personId.substring(7));
+var load = function(personId) {
+	var p = findPerson(personId.substring(7));
 
-    $('#table').hide();
-    $('#view').show();
+	$('#table').hide();
+	$('#view').show();
 
-    $('#view .card-body h1').html(p.name);
-    $('#view .card-body p').html(p.phone);
+	$('#view .card-body h1').html(p.name);
+	$('#view .card-body p').html(p.phone);
 
-    $('#editBtn').click(function(){
-        edit(p.id);
-    });
+	$('#editBtn').click(function() {
+		edit(p.id);
+	});
 
-    $('#deleteBtn').click(function(){
-        exclude(p.id);
-    });
+	$('#deleteBtn').click(function() {
+		exclude(p.id);
+	});
 };
 
-var edit = function(id){
-    var p = findPerson(id);
-    $('#save').click(save);
-    $('#name').val(p.name);
-    $('#phone').val(p.phone);
-    $('#view').hide();
-    $('#edit').show();
+var edit = function(id) {
+	var p = findPerson(id);
+	$('#save').click(save);
+	$('#name').val(p.name);
+	$('#phone').val(p.phone);
+	$('#view').hide();
+	$('#edit').show();
 };
 
-var exclude = function(id){
-    console.log('exclude', id);
-    seeTable();
+var exclude = function(id) {
+	console.log('exclude', id);
+	seeTable();
 };
 
-var findPerson = function(id){
-    return list.find(function(person){
-        return person.id == id;
-    });
+var findPerson = function(id) {
+	return list.find(function(person) {
+		return person.id == id;
+	});
 }
