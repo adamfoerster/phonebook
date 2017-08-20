@@ -22,7 +22,7 @@ class Person{
     }
 
     public function add($person){
-        $person['id'] = sizeof($this->list);
+        $person['id'] = sizeof($this->list) + 1;
         $this->list[$person['id']] = $person;
         file_put_contents("array.json",json_encode($this->list));
         return true;
