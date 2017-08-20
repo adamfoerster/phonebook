@@ -47,7 +47,7 @@ class Person{
 
     public function edit($person){
         $this->list[$person['id']] = $person;
-        print_r($person);print_r($this->list);
+        // print_r($person);print_r($this->list);
         file_put_contents("array.json",json_encode($this->list));
     }
 
