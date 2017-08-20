@@ -6,7 +6,7 @@ class Person{
     public $list = [];
 
     public function __construct(){
-        if (isset($_SESSION['person_list'])){
+        if (file_get_contents('array.json')){
             $this->list = json_decode(file_get_contents('array.json'), true);
         } else {
             $this->list = [
