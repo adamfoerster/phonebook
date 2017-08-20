@@ -21,6 +21,7 @@ if (isset($_GET['r'])){
             echo(json_encode($pbCtrl->load($_GET['id'])));
             break;
         case 'phonebook.delete':
+            echo $_GET['id'];
             echo(json_encode($pbCtrl->delete($_GET['id'])));
             break;
 
