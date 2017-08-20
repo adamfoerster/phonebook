@@ -4,7 +4,7 @@ require('./controllers/PhoneBookCtrl.php');
 require('./models/Person.php');
 
 header("Access-Control-Allow-Origin: *");
-// header("Content-Type: text/json");
+header("Content-Type: application/json");
 
 $pbCtrl = new PhoneBookCtrl();
 // print_r($_GET);
