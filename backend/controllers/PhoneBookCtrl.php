@@ -9,7 +9,9 @@ class PhoneBookCtrl{
     }
 
     public function save($person){
+        echo 'vou buscar';
         print_r($this->person->load($person['id']));
+        exit;
         if ($person['id'] && $this->person->load($person['id'])){
             return ['recordSaved'=> $this->person->edit($person)];
         } else {
