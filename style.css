@@ -28,7 +28,7 @@ body {
     max-width: 46rem;
 }
 
-#table{
+#table .card{
     max-height: 320px;
     overflow: auto;
 }

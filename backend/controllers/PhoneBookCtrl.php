@@ -10,9 +10,9 @@ class PhoneBookCtrl{
 
     public function save($person){
         if ($person['id'] && $this->person->load($person['id'])){
-            $this->person->edit($person);
+            return ['recordSaved'=> $this->person->edit($person)];
         } else {
-            $this->person->add($person);
+            return ['recordSaved'=> $this->person->add($person)];
         }
     }
 

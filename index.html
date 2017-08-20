@@ -20,26 +20,28 @@
             <h3 class="text-muted">Agenda</h3>
         </div>
 
-        <form class="form-inline">
-            <input type="text" class="form-control" id="search" placeholder="Pesquisar">
-            <button type="submit" class="form-control btn btn-secondary" id="search-btn">&nbsp;</button>
-        </form>
-
         <br />
+        <div id="table">
+            <form class="form-inline">
+                <input type="text" class="form-control" id="search" placeholder="Pesquisar">
+                <button type="submit" class="form-control btn btn-secondary" id="search-btn">&nbsp;</button>
+            </form>
+            <br />
+            <button type="button" class="btn btn-success" id="add">Adicionar contato</button><br /><br />
 
-        <div class="card" id="table">
-            <div class="card-body">
-                <button type="button" class="btn btn-success" id="add">Adicionar contato</button><br /><br />
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Telefone</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody">
-                    </tbody>
-                </table>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Telefone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
@@ -60,7 +62,7 @@
         <div class="card" id="edit">
             <div class="card-body">
                 <form>
-                    <input type="hidden" name="id" id="id"/>
+                    <input type="hidden" name="id" id="id" />
                     <div class="form-group">
                         <label for="name">Nome</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nome">

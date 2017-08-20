@@ -25,7 +25,7 @@ class Person{
         $person['id'] = sizeof($this->list) + 1;
         $this->list[$person['id']] = $person;
         file_put_contents("array.json",json_encode($this->list));
-        return true;
+        return $person['id'];
     }
 
     public function load($id){
@@ -49,6 +49,7 @@ class Person{
     public function delete($id){
         unset($this->list[$id]);
         file_put_contents("array.json",json_encode($this->list));
+        return $id;
     }
 }
 ?>

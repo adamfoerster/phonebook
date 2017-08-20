@@ -12,7 +12,6 @@ $.get(backend + "phonebook.list",
                 list.push(data[person]);
             }
         }
-        console.log(data, list);
         seeTable();
 	})
 	.fail(function(error) {
@@ -37,18 +36,22 @@ var seeTable = function() {
 
 var save = function() {
     let post = {id: $('#id').val(), name: $('#name').val(), phone: $('#phone').val()};
-    console.log('save', post);
-    $.ajax({
-        type: 'POST',
-        url: backend+'phonebook.save',
-        data: post,
-        success: function(){
-            console.log('post sent');
-            seeTable();
-        },
-        fail: function(error){
-            console.log(error);
-        }
+    // $.ajax({
+    //     type: 'POST',
+    //     url: backend+'phonebook.save',
+    //     data: post,
+    //     success: function(){
+    //         console.log('post sent');
+    //         seeTable();
+    //     },
+    //     fail: function(error){
+    //         console.log(error);
+    //     }
+    // });
+    $.post(backend+'phonebook.save' , post)
+    .done(function(){
+        console.log('post sent');
+        seeTable();
     });
 };
 
@@ -71,6 +74,7 @@ var load = function(personId) {
 var edit = function(id=null) {
     if (id){
         var p = findPerson(id);
+        $('#id').val(id);
         $('#name').val(p.name);
         $('#phone').val(p.phone);
 
