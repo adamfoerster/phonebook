@@ -15,17 +15,18 @@ self.addEventListener('fetch', function(evt) {
 });
 
 function precache() {
-	return caches.open(CACHE).then(function(cache) {
-		return cache.addAll([
-			'./img'
-		]);
-	});
+    return caches.open(CACHE);
+	// return caches.open(CACHE).then(function(cache) {
+		// return cache.addAll([
+		// 	'./img'
+		// ]);
+	// });
 }
 
 function fromCache(request) {
 	return caches.open(CACHE).then(function(cache) {
 		return cache.match(request).then(function(matching) {
-			return matching || Promise.reject('no-match');
+			return Promise.reject('no-match');
 		});
 	});
 }
