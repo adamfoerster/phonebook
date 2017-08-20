@@ -1,81 +1,33 @@
-var CACHE = 'network-or-cache';
+self.addEventListener("activate", function(event) {
+	/* Just like with the install event, event.waitUntil blocks activate on a promise.
+	   Activation will fail unless the promise is fulfilled.
+	*/
+	console.log('WORKER: activate event in progress.');
 
-self.addEventListener('install', function(evt) {
-  console.log('The service worker is being installed.');
-  evt.waitUntil(precache());
+	event.waitUntil(
+		caches
+		/* This method returns a promise which will resolve to an array of available
+		   cache keys.
+		*/
+		.keys()
+		.then(function(keys) {
+			// We return a promise that settles when all outdated caches are deleted.
+			return Promise.all(
+				keys
+				.filter(function(key) {
+					// Filter by keys that don't start with the latest version prefix.
+					return !key.startsWith(version);
+				})
+				.map(function(key) {
+					/* Return a promise that's fulfilled
+					   when each outdated cache is deleted.
+					*/
+					return caches.delete(key);
+				})
+			);
+		})
+		.then(function() {
+			console.log('WORKER: activate completed.');
+		})
+	);
 });
-
-self.addEventListener('fetch', function(evt) {
-  console.log('The service worker is serving the asset.');
-  evt.respondWith(fromNetwork(evt.request, 400).catch(function () {
-    return fromCache(evt.request);
-  }));
-});
-
-function precache() {
-  return caches.open(CACHE).then(function (cache) {
-    return cache.addAll([
-      './index.html',
-      './img'
-    ]);
-  });
-}
-
-function fromNetwork(request, timeout) {
-  return new Promise(function (fulfill, reject) {
-    var timeoutId = setTimeout(reject, timeout);
-
-    fetch(request).then(function (response) {
-      clearTimeout(timeoutId);
-      fulfill(response);
-    }, reject);
-  });
-}
-
-function fromCache(request) {
-  return caches.open(CACHE).then(function (cache) {
-    return cache.match(request).then(function (matching) {
-      return matching || Promise.reject('no-match');
-    });
-  });
-}
-// var CACHE = 'cache-and-update';
-
-// self.addEventListener('install', function(evt) {
-// 	console.log('The service worker is being installed.');
-//
-// 	evt.waitUntil(precache());
-// });
-
-
-// self.addEventListener('fetch', function(evt) {
-// 	console.log('The service worker is serving the asset.');
-
-	// evt.respondWith(fromCache(evt.request));
-	// evt.waitUntil(update(evt.request));
-// });
-
-// function precache() {
-//     return caches.open(CACHE);
-// 	// return caches.open(CACHE).then(function(cache) {
-// 		// return cache.addAll([
-// 		// 	'./img'
-// 		// ]);
-// 	// });
-// }
-
-// function fromCache(request) {
-// 	return caches.open(CACHE).then(function(cache) {
-// 		return cache.match(request).then(function(matching) {
-// 			return Promise.reject('no-match');
-// 		});
-// 	});
-// }
-//
-// function update(request) {
-// 	return caches.open(CACHE).then(function(cache) {
-// 		return fetch(request).then(function(response) {
-// 			return cache.put(request, response);
-// 		});
-// 	});
-// }
