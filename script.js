@@ -1,97 +1,82 @@
 var backend = "http://phonebook.adamfoerster.com/backend/index.php?r=";
-var list = [{
-		id: "1",
-		name: "Adam Foerster",
-		phone: "243352323"
-	},
-	{
-		id: "2",
-		name: "Rebecca Foerster",
-		phone: "243352323"
-	},
-	{
-		id: "3",
-		name: "Phoebe Buffay",
-		phone: "243352323"
-	},
-	{
-		id: "4",
-		name: "Chandler Bing",
-		phone: "243352323"
-	},
-	{
-		id: "5",
-		name: "Monica Geller",
-		phone: "243352323"
-	},
-	{
-		id: "6",
-		name: "Ross Geller",
-		phone: "243352323"
-	},
-	{
-		id: "7",
-		name: "Rachel Gray",
-		phone: "243352323"
-	},
-];
 
+var list = [];
+$('#table').hide();
+$('#edit').hide();
+$('#view').hide();
 $.get(backend + "phonebook.list",
     function(data) {
-        // list = json_encode(data);
+        // list = data;
+        for (var person in data) {
+            if (data.hasOwnProperty(person)) {
+                list.push(data[person]);
+            }
+        }
         console.log(data, list);
-	})
-	.done(function() {
-		alert("second success");
+        seeTable();
 	})
 	.fail(function(error) {
 		console.log(error);
 	});
 
-$(list).each(function() {
-	$('#tbody').append(`<tr id="person_${this.id}"><td>${this.name}</td><td>${this.phone}</td></tr>`);
-});
-
-$('#edit').hide();
-$('#view').hide();
-
-$('tr').click(function(e) {
-	load(e.currentTarget.id);
-});
-
 var seeTable = function() {
+    $('#tbody').html('');
+    $(list).each(function() {
+        $('#tbody').append(`<tr id="person_${this.id}"><td>${this.name}</td><td>${this.phone}</td></tr>`);
+    });
+    $('tr').click(function(e) {
+    	load(e.currentTarget.id);
+    });
+    $('#add').click(function(){
+        edit();
+    });
 	$('#table').show();
 	$('#edit').hide();
 	$('#view').hide();
 };
 
-var save = function(person) {
-	seeTable();
+var save = function() {
+    let post = {id: $('#id').val(), name: $('#name').val(), phone: $('#phone').val()};
+    console.log('save', post);
+    $.ajax({
+        type: 'POST',
+        url: backend+'phonebook.save',
+        data: post,
+        success: function(){
+            console.log('post sent');
+            seeTable();
+        },
+        fail: function(error){
+            console.log(error);
+        }
+    });
 };
 
 var load = function(personId) {
-	var p = findPerson(personId.substring(7));
+    var p = findPerson(personId.substring(7));
+    $('#view .card-body h1').html(p.name);
+    $('#view .card-body p').html(p.phone);
+    $('#editBtn').click(function() {
+        edit(p.id);
+    });
 
 	$('#table').hide();
 	$('#view').show();
-
-	$('#view .card-body h1').html(p.name);
-	$('#view .card-body p').html(p.phone);
-
-	$('#editBtn').click(function() {
-		edit(p.id);
-	});
 
 	$('#deleteBtn').click(function() {
 		exclude(p.id);
 	});
 };
 
-var edit = function(id) {
-	var p = findPerson(id);
+var edit = function(id=null) {
+    if (id){
+        var p = findPerson(id);
+        $('#name').val(p.name);
+        $('#phone').val(p.phone);
+
+    }
 	$('#save').click(save);
-	$('#name').val(p.name);
-	$('#phone').val(p.phone);
+    $('#table').hide();
 	$('#view').hide();
 	$('#edit').show();
 };

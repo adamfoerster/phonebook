@@ -29,6 +29,7 @@
 
         <div class="card" id="table">
             <div class="card-body">
+                <button type="button" class="btn btn-success" id="add">Adicionar contato</button><br /><br />
                 <table class="table">
                     <thead>
                         <tr>
@@ -51,6 +52,7 @@
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-primary" id="editBtn">Editar</button>
                     <button type="button" class="btn btn-danger" id="deleteBtn">Excluir</button>
+                    <button type="button" class="btn btn-warning" onclick="seeTable()">Cancelar</button>
                 </div>
             </div>
         </div>
@@ -58,7 +60,7 @@
         <div class="card" id="edit">
             <div class="card-body">
                 <form>
-                    <input type="hidden" name="id" />
+                    <input type="hidden" name="id" id="id"/>
                     <div class="form-group">
                         <label for="name">Nome</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nome">
@@ -69,7 +71,7 @@
                     </div>
                     <div class="btn-group" role="group">
                         <button type="button" class="btn btn-success" id="save">Salvar</button>
-                        <button type="button" class="btn btn-primary" onclick="seeTable()">Cancelar</button>
+                        <button type="button" class="btn btn-warning" onclick="seeTable()">Cancelar</button>
                     </div>
                 </form>
             </div>
