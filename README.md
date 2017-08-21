@@ -7,5 +7,6 @@ O projeto functionando pode ser visto em https://phonebook.adamfoerster.com
 git clone https://github.com/adamfoerster/phonebook.git
 ```
 Na raiz do projeto estão os arquivos a serem hospedados. A pasta raiz pode ser hospedada em qualquer servidor HTTP. A pasta backend contém os arquivos com o serviço REST. Esta pasta precisa ser servida a partir servidor com suporte a PHP 5 ou superior.
+Após hospedar os arquivos altere a primeira linha do `script.js` para corresponder à URL pública do arquivo `/backend/index.php`.  
 ## PWA
 As funcionalidades PWA podem ser verifcadas através da extensão [Lighthouse](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) para Google Chrome.

@@ -1,3 +1,6 @@
+var backend = "https://phonebook.adamfoerster.com/backend/";
+backend = backend + 'index.php?r=';
+
 if ('serviceWorker' in navigator) {
 	console.log('CLIENT: service worker registration in progress.');
 	navigator.serviceWorker.register('/service-worker.js').then(function() {
@@ -8,8 +11,6 @@ if ('serviceWorker' in navigator) {
 } else {
 	console.log('CLIENT: service worker is not supported.');
 }
-
-var backend = "https://phonebook.adamfoerster.com/backend/index.php?r=";
 
 var list = [];
 $('#table').hide();
